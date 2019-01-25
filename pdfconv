@@ -1,0 +1,3 @@
+#!/bin/bash
+
+pandoc -f markdown ${1} -N -o ${1}.pdf  --template=template.tex --latex-engine=lualatex --highlight-style=tango -F pandoc-crossref
