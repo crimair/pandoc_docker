@@ -2,7 +2,4 @@
 
 current_path=`pwd`
 
-sudo docker run -it -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER) --name pandoc_docker_vm  -v ${current_path}:/mnt pandoc_docker /bin/bash -c "cd /mnt && bash pdfconv ${1}"
-sudo docker stop pandoc_docker_vm
-sudo docker rm pandoc_docker_vm
-
+sudo docker run --rm -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER) --name pandoc_docker_vm  -v ${current_path}:/mnt pandoc_docker /bin/bash -c "cd /mnt && bash pdfconv ${1}"
