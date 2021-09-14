@@ -2,7 +2,18 @@
 
 current_path=`pwd`
 
+cat > cmd_pdfconv <<EOT
+#!/bin/bash
+
+if [ -f template.tex ] ; then
+    pandoc -f markdown \${1} -N -o \${1}.pdf --template=template.tex --pdf-engine=lualatex --highlight-style=tango -F pandoc-crossref
+fi
+
+pandoc \${1} -o \${1}.2.pdf --pdf-engine=xelatex -V documentclass=bxjsarticle -V classoption=pandoc
+EOT
+
+
 docker run --rm -e LOCAL_UID=$(id -u $USER) -e LOCAL_GID=$(id -g $USER) \
-	--name pandoc_docker_vm  \
-	-v ${current_path}:/mnt \
-	pandoc_docker /bin/bash -c "cd /mnt && bash pdfconv ${1}"
+ 	--name pandoc_docker_vm  \
+ 	-v ${current_path}:/mnt \
+ 	pandoc_docker /bin/bash -c "cd /mnt && bash cmd_pdfconv ${1}"
