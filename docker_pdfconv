@@ -9,7 +9,7 @@ if [ -f template.tex ] ; then
     pandoc -f markdown \${1} -N -o \${1}.pdf --template=template.tex --pdf-engine=lualatex --highlight-style=tango -F pandoc-crossref
 fi
 
-pandoc \${1} -o \${1}.2.pdf --pdf-engine=xelatex -V documentclass=bxjsarticle -V classoption=pandoc
+pandoc \${1} -o \${1}.2.pdf --pdf-engine=xelatex  --highlight-style=tango -V documentclass=bxjsarticle -V classoption=pandoc
 EOT
 
 
